@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Activity</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e4e9ae, #dcedc8);
+        }
+        .header {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 100px auto 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .form-group {
+            display: table-row;
+        }
+        .form-group label {
+            display: table-cell;
+            padding-right: 10px;
+            font-weight: bold;
+            width: 30%;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select {
+            display: table-cell;
+            width: 70%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        select {
+            appearance: none; /* Remove default appearance */
+            background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="7 9 11 9 10 12"></polygon></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+            color: #4CAF50;
+        }
+        .footer {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Add Activity
+    </div>
+    <div class="form-container">
+        <form id="activityForm">
+            <table>
+                <tr class="form-group">
+                    <th><label for="farmerName">Farmer Name:</label></th>
+                    <td><input type="text" id="farmerName" name="farmerName" required></td>
+                </tr>
+                <tr class="form-group">
+                    <th><label for="age">Age:</label></th>
+                    <td><input type="number" id="age" name="age" required></td>
+                </tr>
+                <tr class="form-group">
+                    <th><label for="kgs">Kilograms:</label></th>
+                    <td><input type="number" id="kgs" name="kgs" required></td>
+                </tr>
+                <tr class="form-group">
+                    <th><label for="totalAmount">Total Amount:</label></th>
+                    <td><input type="number" id="totalAmount" name="totalAmount" required></td>
+                </tr>
+                <tr class="form-group">
+                    <th><label for="rate">Rate:</label></th>
+                    <td><input type="number" id="rate" name="rate" required></td>
+                </tr>
+                <tr class="form-group">
+                    <th><label for="flowerName">Flower Name:</label></th>
+                    <td><input type="text" id="flowerName" name="flowerName" required></td>
+                </tr>
+                <tr class="form-group">
+                    <th><label for="cash">Cash:</label></th>
+                    <td>
+                        <select id="cash" name="cash" required>
+                            <option value="">Select...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="form-group">
+                    <th><label for="date">Date:</label></th>
+                    <td><input type="text" id="date" name="date" class="datepicker" required></td>
+                </tr>
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="message"></div>
+
+    <div class="footer">
+        &copy; 2024 E-Florist. All rights reserved.
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.getElementById('activityForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch('http://localhost:5000/api/add-activity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById('message').innerText = 'Activity added successfully';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error here
+            });
+        });
+
+        flatpickr('.datepicker', {
+            dateFormat: 'd-m-Y'
+        });
+    </script>
+</body>
+</html>

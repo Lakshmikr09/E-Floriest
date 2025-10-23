@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        .logout-button {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #6c757d;
+            padding: 15px;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px 0;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container input, .form-container select, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Flower Shop Admin Panel</h1>
+        <a href="javascript:void(0);" id="logout-button" class="logout-button">Logout</a>
+    </div>
+
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#orders">Orders</a>
+        <a href="#inventory">Inventory</a>
+        <a href="#settings">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <h2>Dashboard</h2>
+        <p>Welcome to the Flower Shop Admin Panel. Here you can manage your orders, inventory, and settings.</p>
+
+        <h2 id="inventory">Add New Flower</h2>
+        <div class="form-container">
+            <form>
+                <label for="flower-name">Flower Name</label>
+                <input type="text" id="flower-name" name="flower-name" required>
+
+                <label for="flower-type">Flower Type</label>
+                <select id="flower-type" name="flower-type">
+                    <option value="rose">Rose</option>
+                    <option value="tulip">Tulip</option>
+                    <option value="lily">Lily</option>
+                    <option value="orchid">Orchid</option>
+                </select>
+
+                <label for="flower-price">Price</label>
+                <input type="number" id="flower-price" name="flower-price" step="0.01" required>
+
+                <label for="flower-description">Description</label>
+                <textarea id="flower-description" name="flower-description" rows="4" required></textarea>
+
+                <button type="submit">Add Flower</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle the logout button click
+        document.getElementById('logout-button').addEventListener('click', function() {
+            window.location.href = 'abc.html';
+        });
+    </script>
+</body>
+</html>
