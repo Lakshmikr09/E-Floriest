@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers List</title>
+    <style>
+        body  {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e4e9ae, #dcedc8);
+        }
+        .header {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #addFarmerButton {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #farmersTable {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        #farmersTable th, #farmersTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #farmersTable th {
+            background-color: #f2f2f2;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin: 10px 0 5px;
+        }
+
+        form input {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .footer {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Farmer List
+    </div>
+    <div class="container">
+        <button id="addFarmerButton">Add Farmer</button>
+        <table id="farmersTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th> <!-- New column for actions -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Farmers will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Farmer</h2>
+            <form id="farmerForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required>
+                <button type="submit">Add Farmer</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addFarmerButton = document.getElementById('addFarmerButton');
+            const modal = document.getElementById('modal');
+            const closeModal = document.querySelector('.close');
+            const farmerForm = document.getElementById('farmerForm');
+            const farmersTableBody = document.querySelector('#farmersTable tbody');
+
+            // Load farmers from localStorage
+            loadFarmers();
+
+            addFarmerButton.addEventListener('click', () => {
+                modal.style.display = 'block';
+            });
+
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            farmerForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+
+                addFarmer(name, phone);
+
+                farmerForm.reset();
+                modal.style.display = 'none';
+            });
+
+            function addFarmer(name, phone) {
+                const farmer = { name, phone };
+
+                // Get farmers from localStorage
+                const farmers = JSON.parse(localStorage.getItem('farmers')) || [];
+
+                // Add new farmer to the list
+                farmers.push(farmer);
+
+                // Save updated farmers list to localStorage
+                localStorage.setItem('farmers', JSON.stringify(farmers));
+
+                // Add farmer to the table
+                addFarmerToTable(farmer);
+            }
+
+            function loadFarmers() {
+                const farmers = JSON.parse(localStorage.getItem('farmers')) || [];
+
+                farmers.forEach((farmer, index) => {
+                    addFarmerToTable(farmer, index);
+                });
+            }
+
+            function addFarmerToTable(farmer, index) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${farmer.name}</td>
+                    <td>${farmer.phone}</td>
+                    <td><button class="remove-button" data-index="${index}">Remove</button></td>
+                `;
+                farmersTableBody.appendChild(row);
+
+                // Add event listener to the remove button
+                row.querySelector('.remove-button').addEventListener('click', () => {
+                    removeFarmer(index);
+                });
+            }
+
+            function removeFarmer(index) {
+                // Get farmers from localStorage
+                const farmers = JSON.parse(localStorage.getItem('farmers')) || [];
+
+                // Remove the farmer at the specified index
+                farmers.splice(index, 1);
+
+                // Save updated farmers list to localStorage
+                localStorage.setItem('farmers', JSON.stringify(farmers));
+
+                // Clear and reload the table
+                farmersTableBody.innerHTML = '';
+                loadFarmers();
+            }
+        });
+    </script>
+    <div class="footer">
+        &copy; 2024 E-Florist. All rights reserved.
+    </div>
+</body>
+</html>

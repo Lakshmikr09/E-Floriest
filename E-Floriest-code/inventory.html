@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flower Shop Inventory</title>
+  <style>
+    body  {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #e4e9ae, #dcedc8);
+  }
+  .header {
+      background-color: rgba(76, 175, 80, 0.9);
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 24px;
+  }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .footer {
+      background-color: rgba(76, 175, 80, 0.9);
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      z-index: 1000;
+  }
+  </style>
+</head>
+<body>
+  <div class="header">
+    Flower Shop Inventory
+</div>
+<table id="inventoryTable">
+  <tr>
+    <th>Flower</th>
+    <th>Quantity(kgs)</th>
+    <th>Total Price</th>
+  </tr>
+  <tr>
+    <td>Rose</td>
+    <td><span id="roseQuantity">0</span></td>
+    <td>₹<span id="roseTotalPrice">0</span></td>
+  </tr>
+  <tr>
+    <td>Lily</td>
+    <td><span id="lilyQuantity">0<span></td>
+    <td>₹<span id="lilyTotalPrice">0</span></td>
+  </tr>
+  <tr>
+    <td>Tulips</td>
+    <td><span id="tulipsQuantity">0</span></td>
+    <td>₹<span id="tulipsTotalPrice">0</span></td>
+  </tr>
+</table>
+
+<h3>Add to Inventory</h3>
+<form id="addForm">
+  <label for="flower">Flower:</label>
+  <select id="flower">
+    <option value="rose">Roses</option>
+    <option value="lily">Lilies</option>
+    <option value="tulips">Tulips</option>
+  </select><br>
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" min="1" value="1"><br>
+  <label for="price">Price per unit:</label>
+  <input type="number" id="price" min="1" value="1"><br>
+  <button type="submit">Add</button>
+</form>
+
+<!-- Clear Button -->
+<button id="clearButton">Clear</button>
+
+<script>
+  document.getElementById('addForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const flower = document.getElementById('flower').value;
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const price = parseInt(document.getElementById('price').value);
+    const currentQuantity = parseInt(document.getElementById(flower + 'Quantity').innerText);
+    
+    // Update the quantity
+    const newQuantity = currentQuantity + quantity;
+    document.getElementById(flower + 'Quantity').innerText = newQuantity;
+    
+    // Calculate and update the total price
+    const totalPrice = newQuantity * price;
+    document.getElementById(flower + 'TotalPrice').innerText = totalPrice;
+  });
+
+  // Clear table data
+  document.getElementById('clearButton').addEventListener('click', function() {
+    document.getElementById('roseQuantity').innerText = 0;
+    document.getElementById('roseTotalPrice').innerText = 0;
+    document.getElementById('lilyQuantity').innerText = 0;
+    document.getElementById('lilyTotalPrice').innerText = 0;
+    document.getElementById('tulipsQuantity').innerText = 0;
+    document.getElementById('tulipsTotalPrice').innerText = 0;
+  });
+</script>
+
+<div class="footer">
+  &copy; 2024 E-Florist. All rights reserved.
+</div>
+</body>
+</html>
