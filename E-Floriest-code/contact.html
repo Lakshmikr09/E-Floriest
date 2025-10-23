@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Ensure the body takes the full height of the viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #ebf1a4, #cff3a6); /* Radiant gradient background */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: backgroundFade 10s infinite alternate;
+            position: relative; /* Necessary for positioning the top right button */
+    
+        }
+        @keyframes backgroundFade {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(0.8); }
+        }
+        .header {
+            position: absolute;
+            top: 20px;
+            font-size: 3em; /* Increased font size for better visibility */
+            background: radial-gradient(circle, #ff6b6b, #f06595, #ff6f61, #f093fb); /* Radial gradient background for text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease-in-out;
+            transition: transform 0.3s, text-shadow 0.3s;
+            cursor: pointer;
+        }
+        .header:hover {
+            transform: scale(1.1);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .container {
+            max-width: 800px; /* Increased container width */
+            width: 90%; /* Make sure it fits well on smaller screens */
+            background-color: rgba(255, 255, 255, 0.9); /* Increased opacity */
+            padding: 40px; /* Increased padding for better spacing */
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        h1:hover {
+            color: #ff6347;
+            transform: scale(1.1);
+        }
+        .contact-info {
+            margin-top: 30px;
+            opacity: 0;
+            animation: slideIn 1s forwards 0.5s;
+        }
+        .contact-info p {
+            margin: 10px 0;
+            transform: translateX(-20px);
+            opacity: 0;
+            animation: fadeInSlideIn 0.5s forwards;
+            animation-delay: 0.5s;
+        }
+        .contact-info p:nth-child(2) {
+            animation-delay: 0.7s;
+        }
+        .contact-info p:nth-child(3) {
+            animation-delay: 0.9s;
+        }
+        .contact-info strong {
+            font-weight: bold;
+            color: #555;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeInSlideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        button {
+            display: block;
+           
+            background-color: #ff6347;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #e5533d;
+            transform: scale(1.05);
+        }
+        .top-right-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px; /* Decreased padding for smaller button size */
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px; /* Decreased font size */
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .top-right-button:hover {
+            background-color: #e5533d;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">E-Florist</div>
+    <button class="top-right-button">Back</button>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <div class="contact-info">
+            <p><strong>Developers:</strong> Abhishek, Jayanth, Lakshmi </p> 
+            <p><strong>Email:</strong> lakshmikr092003@gmail.com</p>
+            <p><strong>Instagram:</strong> @yourinstagram</p>
+        </div>
+        <button>Get in Touch</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heading = document.querySelector('h1');
+            const header = document.querySelector('.header');
+            const topRightButton = document.querySelector('.top-right-button');
+
+            heading.addEventListener('mouseenter', () => {
+                heading.style.color = '#ff6347'; // change color on hover
+                heading.style.transform = 'scale(1.1)';
+            });
+
+            heading.addEventListener('mouseleave', () => {
+                heading.style.color = '#333'; // revert back to original color
+                heading.style.transform = 'scale(1)';
+            });
+
+            header.addEventListener('mouseenter', () => {
+                header.style.transform = 'scale(1.1)';
+                header.style.textShadow = '3px 3px 6px rgba(0, 0, 0, 0.7)';
+            });
+
+            header.addEventListener('mouseleave', () => {
+                header.style.transform = 'scale(1)';
+                header.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.5)';
+            });
+
+            topRightButton.addEventListener('click', () => {
+                window.location.href = 'welcome.html';
+            });
+        });
+    </script>
+</body>
+</html>

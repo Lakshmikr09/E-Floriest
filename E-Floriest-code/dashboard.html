@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop Dashboard</title>
+    <style>
+        body  {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e4e9ae, #dcedc8);
+        }
+        .header {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .summary {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+
+        .box {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .box h2 {
+            color: #555;
+        }
+
+        .box p {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .box ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .box ul li {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .owner-details {
+            background-color: #e2e2e2;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+
+        .owner-details h2 {
+            color: #444;
+            text-align: center;
+        }
+
+        .owner-details form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .owner-details label {
+            font-size: 18px;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .owner-details input {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .owner-details button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .owner-details button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Flower Shop Dashboard
+    </div>
+    <div class="container">
+        <div class="summary">
+            <div class="box">
+                <h2>Total Sales</h2>
+                <p id="totalSales">750₹</p> <!-- Updated total sales -->
+                <input type="number" id="newTotalSales" placeholder="Enter new total sales">
+                <button onclick="updateTotalSales()">Update</button>
+            </div>
+            <div class="box">
+                <h2>Recent Orders</h2>
+                <ul id="recentOrdersList">
+                    <li>Roses - 20 kgs</li>
+                    <li>Tulips - 15 kgs</li>
+                    <li>Daisies - 30 kgs</li>
+                </ul>
+                <input type="text" id="newOrder" placeholder="Enter new order">
+                <button onclick="addNewOrder()">Add</button>
+            </div>
+        </div>
+        <div class="owner-details">
+            <h2>Farmer Owner Details</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="Jayanth">
+                <label for="experience">Experience:</label>
+                <input type="text" id="experience" name="experience" value="10 years in floriculture">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" value="Los Angelas">
+                <label for="specialty">Specialty:</label>
+                <input type="text" id="specialty" name="specialty" value="Organic flower cultivation">
+                <button type="button" onclick="saveDetails()">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        function updateTotalSales() {
+            const newTotalSales = document.getElementById('newTotalSales').value;
+            axios.post(`${API_BASE_URL}/total_sales`, { total_sales: newTotalSales })
+                .then(response => {
+                    document.getElementById('totalSales').textContent = '₹' + newTotalSales;
+                    alert(response.data.message);
+                })
+                .catch(error => {
+                    console.error('There was an error updating the total sales!', error);
+                });
+        }
+
+        function addNewOrder() {
+            const newOrder = document.getElementById('newOrder').value;
+            axios.post(`${API_BASE_URL}/recent_orders`, { order: newOrder })
+                .then(response => {
+                    const ul = document.getElementById('recentOrdersList');
+                    const li = document.createElement('li');
+                    li.textContent = newOrder;
+                    ul.appendChild(li);
+                    alert(response.data.message);
+                })
+                .catch(error => {
+                    console.error('There was an error adding the new order!', error);
+                });
+        }
+
+        function saveDetails() {
+            const name = document.getElementById('name').value;
+            const experience = document.getElementById('experience').value;
+            const location = document.getElementById('location').value;
+            const specialty = document.getElementById('specialty').value;
+            
+            axios.post(`${API_BASE_URL}/owner_details`, {
+                name: name,
+                experience: experience,
+                location: location,
+                specialty: specialty
+            })
+            .then(response => {
+                alert(response.data.message);
+            })
+            .catch(error => {
+                console.error('There was an error saving the details!', error);
+            });
+        }
+
+        // Fetch initial data on page load
+        window.onload = function() {
+            // Fetch total sales
+            axios.get(`${API_BASE_URL}/total_sales`)
+                .then(response => {
+                    if (response.data.total_sales) {
+                        document.getElementById('totalSales').textContent = '$' + response.data.total_sales;
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the total sales!', error);
+                });
+
+            // Fetch recent orders
+            axios.get(`${API_BASE_URL}/recent_orders`)
+                .then(response => {
+                    const orders = JSON.parse(response.data);
+                    const ul = document.getElementById('recentOrdersList');
+                    orders.forEach(order => {
+                        const li = document.createElement('li');
+                        li.textContent = order.order;
+                        ul.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the recent orders!', error);
+                });
+
+            // Fetch owner details
+            axios.get(`${API_BASE_URL}/owner_details`)
+                .then(response => {
+                    if (response.data) {
+                        document.getElementById('name').value = response.data.name;
+                        document.getElementById('experience').value = response.data.experience;
+                        document.getElementById('location').value = response.data.location;
+                        document.getElementById('specialty').value = response.data.specialty;
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error fetching the owner details!', error);
+                });
+        }
+    </script>
+    
+<div class="footer">
+    &copy; 2024 E-Florist. All rights reserved.
+</div>
+</body>
+</html>

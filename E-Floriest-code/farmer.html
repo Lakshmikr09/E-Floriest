@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combined Table Example</title>
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0; /* Added to remove default margin */
+        padding: 0; /* Added to remove default padding */
+    }
+
+    /* Table Container Styles */
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px; /* Added to create space around the tables */
+    }
+
+    /* Menu Styles */
+    .menu {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    /* Select Styles */
+    select {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    /* Table Styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa;
+        animation: slide-in-bottom 0.5s ease-out;
+    }
+    th, td {
+        border: 1px solid #dee2e6;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    tbody tr:hover {
+        background-color: #e2e6ea;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Button Table Styles */
+    table.button-table {
+        width: 50%;
+        margin-bottom: 100px;
+    }
+    button {
+        width: 80px;
+        height: 40px;
+        font-size: 14px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    button:active {
+        background-color: #3e8e41;
+    }
+    caption {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* Animation */
+    @keyframes slide-in-bottom {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Menu Container -->
+<div class="menu">
+    <select>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+    </select>
+
+    <select>
+        <option value="option1">Category A</option>
+        <option value="option2">Category B</option>
+        <option value="option3">Category C</option>
+    </select>
+</div>
+
+<!-- Table Container -->
+<div class="table-container">
+
+    <!-- Button Table -->
+    <table class="button-table">
+        <caption>Farmer</caption>
+        <tr>
+            <td><button id="button1" onclick="showValue(this)">January</button></td>
+            <td><button id="button2" onclick="showValue(this)">February</button></td>
+            <td><button id="button3" onclick="showValue(this)">March</button></td>
+        </tr>
+        <tr>
+            <td><button id="button4" onclick="showValue(this)">April</button></td>
+            <td><button id="button5" onclick="showValue(this)">May</button></td>
+            <td><button id="button6" onclick="showValue(this)">June</button></td>
+        </tr>
+        <tr>
+            <td><button id="button7" onclick="showValue(this)">July</button></td>
+            <td><button id="button8" onclick="showValue(this)">August</button></td>
+            <td><button id="button9" onclick="showValue(this)">September</button></td>
+        </tr>
+        <tr>
+            <td><button id="button10" onclick="showValue(this)">October</button></td>
+            <td><button id="button11" onclick="showValue(this)">November</button></td>
+            <td><button id="button12" onclick="showValue(this)">December</button></td>
+        </tr>
+    </table>
+
+    <!-- Table -->
+    <table>
+        <caption>Abhishek R</caption>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Weight</th>
+                <th>Rate</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2024-05-12</td>
+                <td>Rose</td>
+                <td>250kg</td>
+                <td>$2.50</td>
+                <td>$6.25</td>
+            </tr>
+            <tr>
+                <td>2024-05-11</td>
+                <td>Jasmine</td>
+                <td>200kg</td>
+                <td>$1.80</td>
+                <td>$3.60</td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    function showValue(button) {
+        alert("Button clicked! Value: " + button.innerHTML);
+    }
+</script>
+
+</body>
+</html>
