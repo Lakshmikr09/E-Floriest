@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to E-Florist</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff; /* Light blue background */
+        }
+        .navbar {
+            background-color: #4caf50; /* Green background */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2; /* Ensure navbar is above carousel */
+        }
+        .navbar a {
+            float: right;
+            display: block;
+            color: white; /* Text color white */
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        .carousel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .carousel img.active {
+            opacity: 1;
+        }
+        .carousel-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .carousel-controls button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            margin: 0 3px;
+            outline: none;
+        }
+        .carousel-controls button.active {
+            font-weight: bold;
+        }
+        .login-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #800080; /* Purple background */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 3; /* Ensure button is above carousel */
+        }
+        .login-btn:hover {
+            background-color: #6a006a; /* Darker purple on hover */
+        }
+        .content {
+            display: none; /* Hide content, as login button is overlaying */
+        }
+        h1 {
+            color: white; /* Text color white */
+        }
+        .navbar img{
+            float: left;
+            height: 40px;
+            width: 50px;
+            margin: 8px 16px;
+            margin-right: 1px;
+            align-items: center;
+            margin-left: 20px;
+            
+
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="logo2.png" alt="">
+        <a href="welcome.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="#" style="float: left;">Welcome to E-Florist</a>
+    </div>
+    <div class="carousel">
+        <img src="la3.jpg" class="active">
+        <img src="la2.jpg">
+        <img src="la1.jpg">
+        <img src="la4.png">
+        <img src="la5.jpg">
+        <img src="la6.jpg">
+        <img src="la20.jpg">
+        <img src="la10.jpg">
+        <img src="la23.jpg">
+        <img src="la24.jpg">
+        <img src="la25.jpg">
+        <img src="la26.jpg">
+        <img src="la8.jpg">
+        
+        <div class="carousel-controls">
+            <button onclick="changeSlide(0)" class="active"></button>
+            <button onclick="changeSlide(1)"></button>
+            <button onclick="changeSlide(2)"></button>
+            <button onclick="changeSlide(3)"></button>
+            <button onclick="changeSlide(4)"></button>
+            <button onclick="changeSlide(5)"></button>
+            <button onclick="changeSlide(6)"></button>
+            <button onclick="changeSlide(7)"></button>
+            <button onclick="changeSlide(8)"></button>
+            <button onclick="changeSlide(9)"></button>
+            <button onclick="changeSlide(10)"></button>
+            <button onclick="changeSlide(11)"></button>
+            <button onclick="changeSlide(12)"></button>
+            <button onclick="changeSlide(13)"></button>
+        </div>
+    </div>
+    <a href="abc.html " class="login-btn">GET STARTED</a>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+        const buttons = document.querySelectorAll('.carousel-controls button');
+
+        function changeSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            buttons[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            buttons[currentSlide].classList.add('active');
+        }
+
+        function autoChangeSlide() {
+            setInterval(() => {
+                let nextSlide = (currentSlide + 1) % slides.length;
+                changeSlide(nextSlide);
+            }, 2000); // Change slide every 2 seconds
+        }
+
+        autoChangeSlide(); // Start automatic slide change
+
+    </script>
+</body>
+</html>

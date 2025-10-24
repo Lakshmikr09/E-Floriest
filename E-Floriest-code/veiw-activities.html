@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Activities</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e4e9ae, #dcedc8);
+        }
+        .header {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 1000;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://127.0.0.1:5000/api/get-activities')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('tbody');
+
+                    data.forEach(activity => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${activity.farmerName}</td>
+                            <td>${activity.age}</td>
+                            <td>${activity.kgs}</td>
+                            <td>${activity.totalAmount}</td>
+                            <td>${activity.rate}</td>
+                            <td>${activity.flowerName}</td>
+                            <td>${activity.cash}</td>
+                            <td>${activity.date}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script></head>
+<body>
+
+<div class="header">
+    View Farmer Activities
+</div>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Farmer Name</th>
+                <th>Age</th>
+                <th>No of Kgs</th>
+                <th>Total Amount</th>
+                <th>Rate</th>
+                <th>Flower Name</th>
+                <th>Cash</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be populated dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    &copy; 2024 E-Florist. All rights reserved.
+</div>
+
+</body>
+</html>

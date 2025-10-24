@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Shop Settings</title>
+<style>
+body body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.header {
+  background-color: rgba(76, 175, 80, 0.9);
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 24px;
+}
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: #333;
+}
+
+.settings {
+  margin-top: 20px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.footer {
+  background-color: rgba(76, 175, 80, 0.9);
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 1000;
+}
+</style>
+</head>
+<body>
+
+  <div class="header">
+  Flower Shop Settings
+</div>
+<div class="container">
+  <h1>Flower Shop Settings</h1>
+  <div class="settings">
+    <h2>Shop Information</h2>
+    <form id="shopForm">
+      <label for="shopName">Shop Name:</label>
+      <input type="text" id="shopName" name="shopName">
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location">
+      <label for="openingHours">Opening Hours:</label>
+      <input type="text" id="openingHours" name="openingHours">
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('shopForm');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const shopName = formData.get('shopName');
+    const location = formData.get('location');
+    const openingHours = formData.get('openingHours');
+    
+    // Here you can add logic to save the settings, e.g., send them to a server via AJAX request
+    
+    // For demonstration, let's log the settings to the console
+    console.log('Shop Name:', shopName);
+    console.log('Location:', location);
+    console.log('Opening Hours:', openingHours);
+    
+    // Optionally, you can provide feedback to the user
+    const feedback = document.createElement('p');
+    feedback.textContent = 'Settings saved successfully!';
+    feedback.classList.add('fadeIn');
+    form.appendChild(feedback);
+    
+    // Reset the form after submission
+    form.reset();
+  });
+});
+</script>
+<div class="footer">
+  &copy; 2024 E-Florist. All rights reserved.
+</div>
+</body>
+</html>

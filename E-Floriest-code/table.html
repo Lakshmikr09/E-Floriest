@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop Owner Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        section {
+            padding: 20px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flower Shop Owner Interface</h1>
+    </header>
+    <section id="addFlower">
+        <h2>Add New Flower</h2>
+        <form>
+            <label for="flowerName">Name:</label>
+            <input type="text" id="flowerName" name="flowerName" required><br>
+
+            <label for="flowerType">Type:</label>
+            <select id="flowerType" name="flowerType" required>
+                <option value="rose">Rose</option>
+                <option value="tulip">Tulip</option>
+                <option value="lily">Lily</option>
+                <!-- Add more options as needed -->
+            </select><br>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" min="0" step="0.01" required><br>
+
+            <input type="submit" value="Add Flower">
+        </form>
+    </section>
+    <section id="manageFlowers">
+        <h2>Manage Flowers</h2>
+        <!-- Display existing flowers here -->
+    </section>
+</body>
+</html>

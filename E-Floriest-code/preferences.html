@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Owner Portal Preferences</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+        .container.light-theme {
+            background-color: #fff;
+        }
+
+        button.light-theme {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button.light-theme:hover {
+            background-color: #45a049;
+        }
+
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .container.dark-theme {
+            background-color: #444;
+        }
+
+        button.dark-theme {
+            background-color: #555;
+            color: white;
+        }
+
+        button.dark-theme:hover {
+            background-color: #666;
+        }
+
+        /* Blue Theme */
+        body.blue-theme {
+            background-color: #87CEEB;
+            color: #fff;
+        }
+
+        .container.blue-theme {
+            background-color: #4682B4;
+        }
+
+        button.blue-theme {
+            background-color: #1E90FF;
+            color: white;
+        }
+
+        button.blue-theme:hover {
+            background-color: #00BFFF;
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="container light-theme">
+        <h1>Farmer Owner Portal Preferences</h1>
+        <form id="preferencesForm">
+            <div class="form-group">
+                <label for="theme">Select Color Theme:</label>
+                <select id="theme" name="theme">
+                    <option value="light">Light Theme</option>
+                    <option value="dark">Dark Theme</option>
+                    <option value="blue">Blue Theme</option>
+                </select>
+            </div>
+            <button type="submit">Save Preferences</button>
+        </form>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        document.getElementById('preferencesForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(event.target);
+            const formDataObj = Object.fromEntries(formData.entries());
+
+            // Apply the selected theme
+            const theme = formDataObj.theme;
+            document.body.className = `${theme}-theme`;
+            document.querySelector('.container').className = `container ${theme}-theme`;
+            document.querySelector('button').className = `${theme}-theme`;
+
+            // Display preferences summary
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `
+                <h2>Preferences Summary:</h2>
+                <p><strong>Color Theme:</strong> ${theme.charAt(0).toUpperCase() + theme.slice(1)} Theme</p>
+            `;
+        });
+    </script>
+</body>
+</html>

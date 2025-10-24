@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Market Owner Portal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #ffecd2, #fcb69f); /* Gradient background */
+    color: #333;
+    background: url('la27.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  header {
+    background-color: #6ab04c; /* Header color */
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  nav {
+    background-color: #333; /* Navigation background color */
+    padding: 10px 0;
+    position: relative;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: block;
+  }
+
+  a:hover {
+    color: #333;
+    background-color: #fff;
+  }
+
+  .submenu {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    border-radius: 5px;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+  }
+
+  .submenu li {
+    display: block;
+    margin: 0;
+  }
+
+  li:hover .submenu {
+    display: block;
+  }
+
+  main {
+    padding: 20px;
+    position: relative; 
+    object-fit: contain;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Modal styles */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    justify-content: center; /* Center modal horizontally */
+    align-items: center; /* Center modal vertically */
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .modal-content h2 {
+    margin: 0 0 20px;
+  }
+
+  .modal-content button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .modal-content .btn-yes {
+    background-color: #6ab04c;
+    color: #fff;
+  }
+
+  .modal-content .btn-yes:hover {
+    background-color: #4b8c3a;
+  }
+
+  .modal-content .btn-no {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .modal-content .btn-no:hover {
+    background-color: #444;
+  }
+
+  /* Styles for the chat button */
+  .chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFD700;
+    color: #000;
+    padding: 10px; /* Adjust padding to fit the icon */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .chat-button img {
+    width: 30px; /* Adjust the width of the icons */
+    height: 30px; /* Adjust the height of the icons */
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+
+  .chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Styles for the chat options */
+  .social-icons {
+    display: none;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    flex-direction: column;
+    z-index: 999;
+  }
+
+  .social-icon {
+    margin: 5px 0;
+    cursor: pointer;
+    transition: transform 0.3s;
+    width: 40px; /* Adjust the width of the icons */
+    height: 40px; /* Adjust the height of the icons */
+  }
+
+  .social-icon:hover {
+    transform: scale(1.1);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to Flower Market Owner Portal</h1>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="farmerlist.html">Farmer List</a></li>
+    <li><a href="add-activities.html">Add Activities</a></li>
+    <li><a href="veiw-activities.html">View Activities</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="inventory.html">Inventory</a></li>
+    <li><a href="#" id="logoutLink">Logout</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- No "Our Latest Flowers" section -->
+</main>
+
+<!-- Modal for logout confirmation -->
+<div id="logoutModal" class="modal">
+  <div class="modal-content">
+    <h2>Are you sure you want to logout?</h2>
+    <button class="btn-yes" id="confirmLogout">Yes</button>
+    <button class="btn-no" id="cancelLogout">No</button>
+  </div>
+</div>
+
+<!-- Chat with us button -->
+<!--<button class="chat-button" onclick="toggleChat()">
+  <img src="E:\farmer\chat-icon.png" alt="Chat Icon">
+  Chat with us
+</button>
+
+ Social media icons
+<div class="social-icons" id="socialIcons">
+  <a href="https://wa.me/916362815412" target="_blank"><img src="wtsapp.png" alt="WhatsApp" class="social-icon"></a>
+  <a href="https://facebook.com" target="_blank"><img src="facebook.jpg" alt="Facebook" class="social-icon"></a>
+  <a href="https://www.instagram.com/j_a_y_y_u_/" target="_blank"><img src="insta.jpg" alt="Instagram" class="social-icon"></a>
+  <a href="https://www.linkedin.com/in/jayanth-m815412" target="_blank"><img src="Linkedin.jpg" alt="LinkedIn" class="social-icon"></a>
+</div> -->
+
+<script>
+  // Logout link and modal elements
+  const logoutLink = document.getElementById('logoutLink');
+  const logoutModal = document.getElementById('logoutModal');
+  const confirmLogout = document.getElementById('confirmLogout');
+  const cancelLogout = document.getElementById('cancelLogout');
+
+  // Show the modal when the logout link is clicked
+  logoutLink.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default link behavior
+    logoutModal.style.display = 'flex'; // Show the modal with flex to center it
+  });
+
+  // Handle "Yes" button click
+  confirmLogout.addEventListener('click', function() {
+    window.location.href = 'abc.html'; // Redirect to abc.html
+  });
+
+  // Handle "No" button click
+  cancelLogout.addEventListener('click', function() {
+    logoutModal.style.display = 'none'; // Hide the modal
+  });
+
+  // Hide the modal when clicking outside of it
+  window.addEventListener('click', function(event) {
+    if (event.target == logoutModal) {
+      logoutModal.style.display = 'none';
+    }
+  });
+
+  // Function to toggle chat visibility
+  function toggleChat() {
+    const socialIcons = document.getElementById('socialIcons');
+    if (socialIcons.style.display === 'none' || socialIcons.style.display === '') {
+      socialIcons.style.display = 'flex';
+    } else {
+      socialIcons.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>
